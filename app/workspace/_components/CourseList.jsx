@@ -14,7 +14,9 @@ function CourseList() {
     getCourseList();
   }, [user]);
   const getCourseList = async () => {
-    const result = await axios.get("/api/courses");
+    const result = await axios.post("/api/courses", {
+      keyword: "",
+    });
     console.log(result.data);
     setCourseList(result.data);
   };
