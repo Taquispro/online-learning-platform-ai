@@ -12,10 +12,12 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import {
+  ArrowRightCircle,
   Book,
   Compass,
   LayoutDashboard,
   PencilRulerIcon,
+  User,
   WalletCards,
 } from "lucide-react";
 import Link from "next/link"; // ✅ Correct Link component
@@ -24,6 +26,11 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import AddNewCourseDiaglog from "./AddNewCourseDiaglog";
 const SidebarOptions = [
+  {
+    title: "Profile",
+    icon: User,
+    path: "/workspace/profile",
+  },
   {
     title: "Dashboard",
     icon: LayoutDashboard,
@@ -47,7 +54,7 @@ const SidebarOptions = [
   },
   {
     title: "Learn More",
-    icon: WalletCards,
+    icon: ArrowRightCircle,
     path: "/workspace/learn-more",
   },
 ];
