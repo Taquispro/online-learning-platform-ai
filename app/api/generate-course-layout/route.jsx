@@ -36,9 +36,7 @@ Schema:
 , User Input: 
 
 `;
-export const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
-});
+
 export async function POST(req) {
   const { courseId, ...formData } = await req.json();
   // To run this code you need to install the following dependencies:
@@ -87,7 +85,9 @@ export async function POST(req) {
       return NextResponse.json({ resp: "limit reached" });
     }
   }
-
+  const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY,
+  });
   const response = await ai.models.generateContent({
     model,
     config,

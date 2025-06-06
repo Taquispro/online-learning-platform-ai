@@ -18,6 +18,8 @@ import { toast } from "sonner";
 function CourseInfo({ course, viewCourse }) {
   const [loading, setLoading] = useState(false);
   const courseLayout = course?.coursejson?.course;
+  console.log(course);
+  console.log(courseLayout);
   const router = useRouter();
   const GenerateCourseContent = async () => {
     //Call api to generate content

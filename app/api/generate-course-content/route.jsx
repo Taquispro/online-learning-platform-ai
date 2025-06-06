@@ -5,6 +5,7 @@ import { db } from "@/config/db";
 import { coursesTable } from "@/config/schema";
 import { eq } from "drizzle-orm";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { GoogleGenAI } from "@google/genai";
 
 const PROMPT = `Depends on Chapter name and Topic Generate content for each topic in HTML 
 
@@ -46,6 +47,9 @@ export async function POST(req) {
         ],
       },
     ];
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
 
     const response = await ai.models.generateContent({
       model,
@@ -54,6 +58,7 @@ export async function POST(req) {
     });
     // console.log(response.candidates[0].content.parts[0].text);
     const rawResp = response.candidates[0].content.parts[0].text;
+
     const rawJson = rawResp.replace("```json", "").replace("```", "");
     const jsonResp = JSON.parse(rawJson);
     //Generate Youtube
@@ -87,7 +92,7 @@ const getYoutubeVideo = async (topic) => {
   const params = {
     part: "snippet",
     q: topic,
-    maxResult: 4,
+    maxResults: 4,
     type: "video",
     key: process.env.YOUTUBE_API_KEY, //Youtube Api key
   };
