@@ -111,29 +111,27 @@ export async function POST(req) {
   });
   return NextResponse.json({ courseId });
 }
-try{
-const generateImage = async (imagePrompt) => {
-  const BASE_URL = "https://aigurulab.tech";
-  const result = await axios.post(
-    BASE_URL + "/api/generate-image",
-    {
-      width: 1024,
-      height: 1024,
-      input: imagePrompt,
-      model: "flux", //'flux'
-      aspectRatio: "16:9", //Applicable to Flux model only
-    },
-    {
-      headers: {
-        "x-api-key": process.env.AI_GURU_LAB_API, // Your API Key
-        "Content-Type": "application/json", // Content Type
+async function generateImage(imagePrompt) {
+  try {
+    const BASE_URL = "https://aigurulab.tech";
+    const result = await axios.post(
+      BASE_URL + "/api/generate-image",
+      {
+        width: 1024,
+        height: 1024,
+        input: imagePrompt,
+        model: "flux",
+        aspectRatio: "16:9",
       },
-    }
-  );
-  console.log(result.data.image); //Output Result: Base 64 Image
-  return result.data.image;
-}
-  catch(e){
-  console.log(e);
-  return e;
-};
+      {
+        headers: {
+          "x-api-key": process.env.AI_GURU_LAB_API,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return result.data.image;
+  } catch (e) {
+    console.error("Image generation failed:", e);
+    return null;
+  }
