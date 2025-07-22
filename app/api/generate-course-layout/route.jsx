@@ -135,3 +135,4 @@ async function generateImage(imagePrompt) {
     console.error("Image generation failed:", e);
     return null;
   }
+}
