@@ -129,6 +129,6 @@ const generateImage = async (imagePrompt) => {
       },
     }
   );
-  // console.log(result.data.image); //Output Result: Base 64 Image
+  console.log(result.data.image); //Output Result: Base 64 Image
   return result.data.image;
 };
