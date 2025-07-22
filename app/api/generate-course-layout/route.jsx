@@ -111,6 +111,7 @@ export async function POST(req) {
   });
   return NextResponse.json({ courseId });
 }
+try{
 const generateImage = async (imagePrompt) => {
   const BASE_URL = "https://aigurulab.tech";
   const result = await axios.post(
@@ -131,4 +132,8 @@ const generateImage = async (imagePrompt) => {
   );
   console.log(result.data.image); //Output Result: Base 64 Image
   return result.data.image;
+}
+  catch(e){
+  console.log(e);
+  return e;
 };
